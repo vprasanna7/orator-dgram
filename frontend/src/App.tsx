@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import './App.css'; // We'll create this file for styling
 
 const App: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -62,15 +63,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Orator Meeting Assistant</h1>
-      <button onClick={isRecording ? stopRecording : startRecording}>
-        {isRecording ? 'Stop Recording' : 'Start Recording'}
-      </button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
+      <div className="controls">
+        <button 
+          className={`record-button ${isRecording ? 'stop' : 'start'}`}
+          onClick={isRecording ? stopRecording : startRecording}
+        >
+          {isRecording ? 'Stop Recording' : 'Start Recording'}
+        </button>
+      </div>
+      {error && <p className="error">{error}</p>}
+      <div className="transcript-container">
         <h2>Transcript:</h2>
-        <p>{transcript}</p>
+        <p className="transcript">{transcript}</p>
       </div>
     </div>
   );
